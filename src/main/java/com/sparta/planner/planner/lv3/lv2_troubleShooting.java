@@ -1,4 +1,4 @@
-package com.sparta.planner.planner.lv2;
+package com.sparta.planner.planner.lv3;
 /*
 
 과제를 10월 3일부터 만들기 시작했습니다.
@@ -25,5 +25,5 @@ ERROR 52564 --- [Planner] [nio-8080-exec-8] o.a.c.c.C.[.[.[/].[dispatcherServlet
 Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
 [Request processing failed: java.lang.IllegalArgumentException: Timestamp format must be yyyy-mm-dd hh:mm:ss[.fffffffff]] with root cause
 
-지피티한테 물어보고, 같은 팀원의 도움을 받았다. 엔티티 클래스의 변수타입을 바꾸고, 레퍼지토리에서 저장 방식을 바꿔서 해결했다.
+
 */

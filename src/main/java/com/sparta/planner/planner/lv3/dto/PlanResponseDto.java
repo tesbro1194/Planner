@@ -1,10 +1,8 @@
-package com.sparta.planner.planner.lv2.dto;
+package com.sparta.planner.planner.lv3.dto;
 
-import com.sparta.planner.planner.lv2.entity.Plan;
+import com.sparta.planner.planner.lv3.entity.Plan;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter

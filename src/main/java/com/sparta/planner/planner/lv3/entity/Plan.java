@@ -1,9 +1,9 @@
-package com.sparta.planner.planner.lv2.entity;
-import com.sparta.planner.planner.lv2.dto.PlanRequestDto;
+package com.sparta.planner.planner.lv3.entity;
+import com.sparta.planner.planner.lv3.dto.PlanRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.sql.Timestamp;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;

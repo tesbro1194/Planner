@@ -1,12 +1,13 @@
-package com.sparta.planner.planner.lv2.repository;
+package com.sparta.planner.planner.lv3.repository;
 
-import com.sparta.planner.planner.lv2.dto.PlanResponseDto;
-import com.sparta.planner.planner.lv2.entity.Plan;
+import com.sparta.planner.planner.lv3.dto.PlanResponseDto;
+import com.sparta.planner.planner.lv3.entity.Plan;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -44,6 +45,7 @@ public class PlanRepository {
         // DB Insert 후 받아온 기본키 확인
         Long id = keyHolder.getKey().longValue();
         plan.setId(id);
+
         return plan;
     }
 
@@ -83,5 +85,21 @@ public class PlanRepository {
                 return plan;
             }
         });
+    }
+
+    public Plan identifyById(Long id) {
+        String sql = "SELECT * FROM plan WHERE id = ?";
+
+        return jdbcTemplate.query(sql, resultSet -> {
+            if (resultSet.next()) {
+                Plan plan = new Plan();
+                plan.setUserName(resultSet.getString("userName"));
+                plan.setShouldDo(resultSet.getString("shoulDo"));
+
+                return plan;
+            } else {
+                return null;
+            }
+        }, id);
     }
 }
