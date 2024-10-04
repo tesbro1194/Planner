@@ -127,8 +127,8 @@ public class PlanRepository {
     }
 
     public UserResponseDto login(UserRequestDto requestDto) {
-        String sql = "SELECT * FROM user WHERE userId = ? AND pw = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{requestDto}, new RowMapper<UserResponseDto>() {
+        String sql = "SELECT * FROM user WHERE userId = ? AND pw = ?;";
+        return jdbcTemplate.queryForObject(sql, new Object[]{requestDto.getUserId(), requestDto.getPw()}, new RowMapper<UserResponseDto>() {
             @Override
             public UserResponseDto mapRow(ResultSet rs, int rowNum) throws SQLException {
                 UserResponseDto responseDto = new UserResponseDto();
@@ -141,17 +141,18 @@ public class PlanRepository {
         });
     }
 
-    public User identifyForUser(String id, String pw) {
-        String sql = "SELECT * FROM user WHERE id = ? and pw = ?";
-        return jdbcTemplate.query(sql, resultSet -> {
-            if (resultSet.next()) {
-                User user = new User();
-                user.setUserId(resultSet.getString("userId"));
-                user.setPw(resultSet.getString("pw"));
-                return user;
-            } else {
-                return null;
+    public UserResponseDto identifyForUser(String userId, String pw) {
+        String sql = "SELECT * FROM user WHERE userId = ? AND pw = ?;";
+        return jdbcTemplate.queryForObject(sql, new Object[]{userId, pw}, new RowMapper<UserResponseDto>() {
+            @Override
+            public UserResponseDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+                UserResponseDto responseDto = new UserResponseDto();
+                responseDto.setUserName(rs.getString("userName"));
+                responseDto.setUserId(rs.getString("userId"));
+                responseDto.setPw(rs.getString("pw"));
+                responseDto.setEMail(rs.getString("eMail"));
+                return responseDto;
             }
-        }, id, pw);
+        });
     }
 }

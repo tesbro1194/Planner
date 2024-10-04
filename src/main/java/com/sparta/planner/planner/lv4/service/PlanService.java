@@ -61,9 +61,9 @@ public class PlanService {
     public UserResponseDto login(UserRequestDto requestDto) {
         String id = requestDto.getUserId();
         String pw = requestDto.getPw();
-        User user = planRepository.identifyForUser(id, pw);
+        UserResponseDto userResponseDto = planRepository.identifyForUser(id, pw);
 
-        if (user != null) {
+        if (userResponseDto != null) {
             return planRepository.login(requestDto);
         } else {
             throw new IllegalArgumentException("ID와 PW를 확인하세요");
