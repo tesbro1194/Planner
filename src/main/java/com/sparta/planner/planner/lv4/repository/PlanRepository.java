@@ -2,7 +2,11 @@ package com.sparta.planner.planner.lv4.repository;
 
 import com.sparta.planner.planner.lv4.dto.PlanRequestDto;
 import com.sparta.planner.planner.lv4.dto.PlanResponseDto;
+import com.sparta.planner.planner.lv4.dto.UserRequestDto;
+import com.sparta.planner.planner.lv4.dto.UserResponseDto;
 import com.sparta.planner.planner.lv4.entity.Plan;
+import com.sparta.planner.planner.lv4.entity.User;
+import lombok.NoArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -18,6 +22,7 @@ import java.util.List;
 
 @Repository
 public class PlanRepository {
+
     private final JdbcTemplate jdbcTemplate;
     public PlanRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -92,7 +97,7 @@ public class PlanRepository {
         String sql = "DELETE FROM plan WHERE id = ?";
         jdbcTemplate.update(sql, id);
     }
-    public Plan identify(Long id, String pw) {
+    public Plan identifyForPlan(Long id, String pw) {
         String sql = "SELECT * FROM plan WHERE id = ? and pw = ?";
 
         return jdbcTemplate.query(sql, resultSet -> {
@@ -101,6 +106,49 @@ public class PlanRepository {
                 plan.setUserName(resultSet.getString("userName"));
                 plan.setShouldDo(resultSet.getString("shouldDo"));
                 return plan;
+            } else {
+                return null;
+            }
+        }, id, pw);
+    }
+    public User join(User user) {
+        String sql = "INSERT INTO user (userName, userId, pw, eMail) " +
+                "VALUES (?, ?, ?, ?)";
+
+        jdbcTemplate.update(con -> {
+            PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, user.getUserName());
+            preparedStatement.setString(2, user.getUserId());
+            preparedStatement.setString(3, user.getPw());
+            preparedStatement.setString(4, user.getEMail());
+            return preparedStatement;
+        });
+        return user;
+    }
+
+    public UserResponseDto login(UserRequestDto requestDto) {
+        String sql = "SELECT * FROM user WHERE userId = ? AND pw = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{requestDto}, new RowMapper<UserResponseDto>() {
+            @Override
+            public UserResponseDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+                UserResponseDto responseDto = new UserResponseDto();
+                responseDto.setUserName(rs.getString("userName"));
+                responseDto.setUserId(rs.getString("userId"));
+                responseDto.setPw(rs.getString("pw"));
+                responseDto.setEMail(rs.getString("eMail"));
+                return responseDto;
+            }
+        });
+    }
+
+    public User identifyForUser(String id, String pw) {
+        String sql = "SELECT * FROM user WHERE id = ? and pw = ?";
+        return jdbcTemplate.query(sql, resultSet -> {
+            if (resultSet.next()) {
+                User user = new User();
+                user.setUserId(resultSet.getString("userId"));
+                user.setPw(resultSet.getString("pw"));
+                return user;
             } else {
                 return null;
             }

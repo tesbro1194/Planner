@@ -2,6 +2,8 @@ package com.sparta.planner.planner.lv4.controller;
 
 import com.sparta.planner.planner.lv4.dto.PlanRequestDto;
 import com.sparta.planner.planner.lv4.dto.PlanResponseDto;
+import com.sparta.planner.planner.lv4.dto.UserRequestDto;
+import com.sparta.planner.planner.lv4.dto.UserResponseDto;
 import com.sparta.planner.planner.lv4.service.PlanService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -34,5 +36,14 @@ public class PlanController {
     @DeleteMapping("/delete/{id}/{pw}")
     public Long deletePlan(@PathVariable Long id, @PathVariable String pw) {
         return planService.delete(id, pw);
+    }
+
+    @PostMapping("/join")
+    public UserResponseDto join(@RequestBody UserRequestDto requestDto) {
+        return planService.join(requestDto);
+    }
+    @PostMapping("/login")
+    public UserResponseDto login(@RequestBody UserRequestDto requestDto) {
+        return planService.login(requestDto);
     }
 }

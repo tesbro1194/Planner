@@ -1,5 +1,6 @@
 package com.sparta.planner.planner.lv4.entity;
 
+import com.sparta.planner.planner.lv4.dto.UserRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,14 @@ public class User {
     private Date modifiedDate;
     // 입력 받아야 하는 값
     private String userName;
-    private Long identificationNumber;
+    private String userId;
+    private String pw;
     private String eMail;
+
+    public User(UserRequestDto requestDto) {
+        this.userName = requestDto.getUserName();
+        this.userId = requestDto.getUserId();
+        this.pw = requestDto.getPw();
+        this.eMail = requestDto.getEMail();
+    }
 }
