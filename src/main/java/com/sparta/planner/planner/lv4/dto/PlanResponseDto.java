@@ -1,16 +1,14 @@
-package com.sparta.planner.planner.lv2.dto;
+package com.sparta.planner.planner.lv4.dto;
 
-import com.sparta.planner.planner.lv2.entity.Plan;
+import com.sparta.planner.planner.lv4.entity.Plan;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
 public class PlanResponseDto {
     private Long id;
     private Date creationDate;
+    private Date modifiedDate;
 
     private String userName;
     private String pw;

@@ -1,9 +1,9 @@
-package com.sparta.planner.planner.lv2.entity;
-import com.sparta.planner.planner.lv2.dto.PlanRequestDto;
+package com.sparta.planner.planner.lv4.entity;
+import com.sparta.planner.planner.lv4.dto.PlanRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.sql.Timestamp;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -13,12 +13,14 @@ import java.util.Date;
 @NoArgsConstructor
 public class Plan {
     private Long id;
-    private Date creationDate;  // 입력된 시각 자동 저장
+    private Date creationDate;
+    private Date modifiedDate;
+
     private String userName;
     private String pw;
     private String shouldDo;
-    private LocalDateTime startTime;  // startTime은 LocalDateTime
-    private LocalDateTime endTime;    // endTime은 LocalDateTime
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 

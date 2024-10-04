@@ -1,8 +1,8 @@
-package com.sparta.planner.planner.lv2.controller;
+package com.sparta.planner.planner.lv4.controller;
 
-import com.sparta.planner.planner.lv2.dto.PlanRequestDto;
-import com.sparta.planner.planner.lv2.dto.PlanResponseDto;
-import com.sparta.planner.planner.lv2.service.PlanService;
+import com.sparta.planner.planner.lv4.dto.PlanRequestDto;
+import com.sparta.planner.planner.lv4.dto.PlanResponseDto;
+import com.sparta.planner.planner.lv4.service.PlanService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -14,6 +14,7 @@ public class PlanController {
     public PlanController(PlanService planService) {
         this.planService = planService;
     }
+
     @PostMapping("/post")
     public PlanResponseDto createPlan(@RequestBody PlanRequestDto requestDto) {
         return planService.createPlan(requestDto);
@@ -25,5 +26,13 @@ public class PlanController {
     @GetMapping("/getPlan/{id}")
     public PlanResponseDto getPlan(@PathVariable Long id) {
         return planService.getPlan(id);
+    }
+    @PatchMapping("/update/{id}/{pw}")
+    public Long updatePlan(@PathVariable Long id, @PathVariable String pw, @RequestBody PlanRequestDto requestDto) {
+        return planService.updatePlan(id, pw, requestDto);
+    }
+    @DeleteMapping("/delete/{id}/{pw}")
+    public Long deletePlan(@PathVariable Long id, @PathVariable String pw) {
+        return planService.delete(id, pw);
     }
 }

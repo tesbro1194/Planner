@@ -1,4 +1,4 @@
-package com.sparta.planner.planner.lv2.dto;
+package com.sparta.planner.planner.lv4.dto;
 
 import lombok.Getter;
 
@@ -9,4 +9,6 @@ public class PlanRequestDto {
     private String shouldDo;
     private String startTime;
     private String endTime;
+
+
 }
