@@ -87,6 +87,7 @@ public class PlanRepository {
         String sql = "UPDATE plan SET userName = ?, shouldDo = ? WHERE id = ?";
         jdbcTemplate.update(sql, requestDto.getUserName(), requestDto.getShouldDo(), id);
     }
+    @Transactional
     public void delete(Long id) {
         String sql = "DELETE FROM plan WHERE id = ?";
         jdbcTemplate.update(sql, id);
