@@ -27,8 +27,12 @@ public class PlanController {
     public PlanResponseDto getPlan(@PathVariable Long id) {
         return planService.getPlan(id);
     }
-    @PutMapping("/update/{id}")
-    public Long updatePlan(@PathVariable Long id, @RequestBody PlanRequestDto requestDto) {
-        return planService.updatePlan(id, requestDto);
+    @PatchMapping("/update/{id}/{pw}")
+    public Long updatePlan(@PathVariable Long id, @PathVariable String pw, @RequestBody PlanRequestDto requestDto) {
+        return planService.updatePlan(id, pw, requestDto);
+    }
+    @DeleteMapping("/delete/{id}/{pw}")
+    public Long deletePlan(@PathVariable Long id, @PathVariable String pw) {
+        return planService.delete(id, pw);
     }
 }

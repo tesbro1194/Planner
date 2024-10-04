@@ -9,6 +9,7 @@ import java.util.Date;
 public class PlanResponseDto {
     private Long id;
     private Date creationDate;
+    private Date modifiedDate;
 
     private String userName;
     private String pw;

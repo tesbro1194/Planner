@@ -13,7 +13,9 @@ import java.util.Date;
 @NoArgsConstructor
 public class Plan {
     private Long id;
-    private Date creationDate;  // 입력된 시각 자동 저장
+    private Date creationDate;
+    private Date modifiedDate;
+
     private String userName;
     private String pw;
     private String shouldDo;

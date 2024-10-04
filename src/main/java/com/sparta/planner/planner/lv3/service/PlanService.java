@@ -30,9 +30,22 @@ public class PlanService {
         Plan plan = planRepository.findOne(id);
         return new PlanResponseDto(plan);
     }
-
-    public Long updatePlan(Long id, PlanRequestDto requestDto) {
-        Plan plan = planRepository.identifyById(id);
-
+    public Long updatePlan(Long id, String pw, PlanRequestDto requestDto) {
+        Plan plan = planRepository.identify(id, pw);
+        if (plan != null) {
+            planRepository.updatePlan(id, requestDto);
+            return id;
+        } else{
+            throw new IllegalArgumentException("선택한 일정은 존재하지 않습니다.");
+        }
+    }
+    public Long delete(Long id, String pw) {
+        Plan plan = planRepository.identify(id, pw);
+        if (plan != null) {
+            planRepository.delete(id);
+            return id;
+        } else {
+            throw new IllegalArgumentException("선택한 일정은 존재하지 않습니다.");
+        }
     }
 }
