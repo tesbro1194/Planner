@@ -9,6 +9,4 @@ public class PlanRequestDto {
     private String shouldDo;
     private String startTime;
     private String endTime;
-
-
 }

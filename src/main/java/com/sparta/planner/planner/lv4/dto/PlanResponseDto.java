@@ -9,6 +9,7 @@ public class PlanResponseDto {
     private Long id;
     private Date creationDate;
     private Date modifiedDate;
+    private String userId;
 
     private String userName;
     private String pw;

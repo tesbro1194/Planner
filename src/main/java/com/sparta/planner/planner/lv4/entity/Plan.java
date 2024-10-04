@@ -16,6 +16,9 @@ public class Plan {
     private Date creationDate;
     private Date modifiedDate;
 
+    // user 테이블 추가로 생긴 변수
+    private String userId;
+
     private String userName;
     private String pw;
     private String shouldDo;
